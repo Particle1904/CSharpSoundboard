@@ -1,21 +1,14 @@
-﻿using System;
+﻿using NAudio.Wave;
+
+using ParticleSoundboard.src;
+
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using NAudio;
-using NAudio.Wave;
 
 namespace ParticleSoundboard
 {
@@ -24,53 +17,40 @@ namespace ParticleSoundboard
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string _soundsFolderPath = @"E:\Stuff\Sounds\";
+        private string soundsFolderPath = @".\Sounds\";
+        private string[] soundFiles;
 
-        private List<WaveOutCapabilities> _outputDevices = new List<WaveOutCapabilities>();
+        private List<Button> buttons;
+        private SolidColorBrush buttonBackgroundColor;
 
-        private WaveOut _output;
-        private WaveOut _outputLocal;
-        BlockAlignReductionStream stream;
-        BlockAlignReductionStream stream2;
+        private AudioEngine audioEngine;
 
-        private List<Button> _buttons = new List<Button>();
-        private string[] _soundFiles;
+        public float localVolume;
+        public float cableVolume;
 
         public MainWindow()
         {
             InitializeComponent();
-            #region Find buttons, get files from directory and set buttons content.
-            // Find all the buttons that are children of the Grid Named ButtonsGrid.
-            for (int i = 0; i < (7 * 6); i++)
-            {
-                Button? buttonFound = ButtonsGrid.Children.OfType<Button>().FirstOrDefault(button => button.Name == $"Button{i + 1}");
-                if (buttonFound != null)
-                {
-                    _buttons.Add(buttonFound);
-                }
-            }
 
-            // Get a list of files in the Directory.
-            _soundFiles = Directory.GetFiles(_soundsFolderPath, "*", SearchOption.TopDirectoryOnly);
+            SetupSoundsFolder(soundsFolderPath);
+            soundFiles = Directory.GetFiles(soundsFolderPath, "*", SearchOption.TopDirectoryOnly);
 
-            // Change the Buttons Content to be the sound file name.
-            for (int i = 0; i < _soundFiles.Length; i++)
-            {
-                string[] soundFile = _soundFiles[i].Split(@"\");
-                _buttons[i].Content = soundFile.Last().Replace(".mp3", "");
-            }
-            #endregion
+            buttonBackgroundColor = new SolidColorBrush(Color.FromRgb(79, 93, 126));
+            buttons = FindButtons(7, 6);
 
-            for (int i = -1; i < WaveOut.DeviceCount; i++)
-            {
-                _outputDevices.Add(WaveOut.GetCapabilities(i));
-            }
+            SetupButtonsTextContent(soundFiles, buttons);
+            SetupButtonsBackgroundColor(buttons, buttonBackgroundColor);
+
+            StopButton.Background = buttonBackgroundColor;
+
+            audioEngine = new AudioEngine();
+
+            LocalVolumeSlider.Value = 25;
+            CableVolumeSlider.Value = 50;
         }
 
         private void Button_Click(object sender, MouseButtonEventArgs e)
         {
-            ButtonStop_Click(sender, e);
-
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Button senderButton = (Button)sender;
@@ -79,52 +59,123 @@ namespace ParticleSoundboard
                     return;
                 }
 
-                string filePath = $"{_soundsFolderPath}{senderButton.Content}.mp3";
-                #region Output sound stream(virtual cable).
-                WaveStream pcmStream = WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader(filePath));
-                stream = new BlockAlignReductionStream(pcmStream);
+                string filePath = $"{soundsFolderPath}{senderButton.Content}.mp3";
 
-                _output = new WaveOut();
-                _output.DeviceNumber = _outputDevices.IndexOf(_outputDevices.FirstOrDefault(
-                    device => device.ProductName.Contains("Cable")));
-
-                AudioFileReader audioFile = new AudioFileReader(filePath);
-
-                audioFile.Volume = 0.65f;
-
-                _output.Init(audioFile);
-                _output.Play();
-                #endregion
-                #region Local sound stream.
-                WaveStream pcmStream2 = WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader(filePath));
-                stream2 = new BlockAlignReductionStream(pcmStream2);
-
-                _outputLocal = new WaveOut();
-                _outputLocal.DeviceNumber = _outputDevices.IndexOf(_outputDevices.FirstOrDefault(
-                    device => device.ProductName.Contains("Speakers")));
-
-                AudioFileReader audioFileLocal = new AudioFileReader(filePath);
-
-                audioFileLocal.Volume = 0.65f;
-
-                _outputLocal.Init(audioFileLocal);
-                _outputLocal.Play();
-                #endregion
+                audioEngine.PlayAudio(filePath, cableVolume, localVolume);
             }
         }
 
         private void ButtonStop_Click(object sender, MouseButtonEventArgs e)
         {
-            if (_outputLocal != null)
+            audioEngine.StopWaveOut();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Find all the instances typeof(Button) and return a list with them.
+        /// Buttons must be named: "Button{i}" for this function to find them starting with "Button1"
+        /// </summary>
+        /// <param name="columns"> Number of Columns. </param>
+        /// <param name="rows"> Number of Rows. </param>
+        /// <returns></returns>
+        private List<Button> FindButtons(int columns, int rows)
+        {
+            List<Button> buttons = new List<Button>(columns * rows);
+
+            for (int i = 0; i < (columns * rows); i++)
             {
-                _outputLocal.Stop();
-                _outputLocal.Dispose();
+                Button? buttonFound = ButtonsGrid.Children.OfType<Button>().FirstOrDefault(button => button.Name == $"Button{i + 1}");
+                if (buttonFound != null)
+                {
+                    buttons.Add(buttonFound);
+                }
             }
-            if (_output != null)
+
+            return buttons;
+        }
+
+        /// <summary>
+        /// Setup Buttons Text Content to be the same as the Sound File name.
+        /// </summary>
+        /// <param name="soundFilesArray"> Array of Sound Files found in a directory. </param>
+        /// <param name="buttonsList"> List of Buttons to setup the name. </param>
+        private void SetupButtonsTextContent(string[] soundFilesArray, List<Button> buttonsList)
+        {
+            for (int i = 0; i < soundFilesArray.Length; i++)
             {
-                _output.Stop();
-                _output.Dispose();
+                string[] soundFile = soundFilesArray[i].Split(@"\");
+                buttonsList[i].Content = soundFile.Last().Replace(".mp3", "");
             }
+        }
+
+        /// <summary>
+        /// Setup the Buttons Background Color.
+        /// </summary>
+        /// <param name="buttonsList"> List of Buttons to setup background. </param>
+        /// <param name="backgroundColor"> The color to use as a background color. </param>
+        private void SetupButtonsBackgroundColor(List<Button> buttonsList, SolidColorBrush backgroundColor)
+        {
+            foreach (Button button in buttonsList)
+            {
+                button.Background = backgroundColor;
+            }
+        }
+
+        /// <summary>
+        /// Try to find the Sounds folder inside the application root folder.
+        /// If it doens't exist, create a new one.
+        /// </summary>
+        /// <param name="folderName"> The folder String Path to create. ".\folderName" can be used to create a folder in the application root folder.</param>
+        private void SetupSoundsFolder(string folderName)
+        {
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
+        }
+
+        /// <summary>
+        /// Event when window is closing.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            audioEngine.DisposeWaveOut();
+        }
+
+        /// <summary>
+        /// Event when CheckBox is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AudioOverlapCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            audioEngine.CanAudioOverlap = (bool)AudioOverlapCheckBox.IsChecked;
+        }
+
+        /// <summary>
+        /// Event when Cable Volume Slider changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CableVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            cableVolume = (float)CableVolumeSlider.Value / 100.0f;
+        }
+
+        /// <summary>
+        /// Event when Local Volume Slider changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LocalVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            localVolume = (float)LocalVolumeSlider.Value / 100.0f;
         }
     }
 }
