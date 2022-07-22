@@ -31,6 +31,7 @@ namespace ParticleSoundboard
         public MainWindow()
         {
             InitializeComponent();
+            audioEngine = new AudioEngine();
 
             SetupSoundsFolder(soundsFolderPath);
             soundFiles = Directory.GetFiles(soundsFolderPath, "*", SearchOption.TopDirectoryOnly);
@@ -43,7 +44,6 @@ namespace ParticleSoundboard
 
             StopButton.Background = buttonBackgroundColor;
 
-            audioEngine = new AudioEngine();
 
             LocalVolumeSlider.Value = 25;
             CableVolumeSlider.Value = 50;

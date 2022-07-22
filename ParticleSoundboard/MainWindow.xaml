@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParticleSoundboard"
         mc:Ignorable="d" Title="Particle Soundboard" Height="600" Width="945" Background="#FF2D3134"
-        ResizeMode="NoResize" WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" Closing="Window_Closing">
+        ResizeMode="CanMinimize" WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid Name="ButtonsGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
@@ -116,7 +116,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Local Volume" FontSize="14" Foreground="White" Grid.Row="0"/>
-                <Slider x:Name="LocalVolumeSlider" Grid.Row="1" Maximum="100" ToolTip="{Binding Path=LocalVolume}" ValueChanged="LocalVolumeSlider_ValueChanged"/>
+                <Slider x:Name="LocalVolumeSlider" Grid.Row="1" Maximum="100" ValueChanged="LocalVolumeSlider_ValueChanged"/>
             </Grid>
         </Viewbox>
         

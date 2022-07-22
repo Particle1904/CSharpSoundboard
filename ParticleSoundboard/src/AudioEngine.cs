@@ -45,8 +45,9 @@ namespace ParticleSoundboard.src
                 localCableOutput = new WaveOut();
             }
 
-            PlayMp3Audio(filePath, "Cable", virtualCableVolume);
-            PlayMp3Audio(filePath, "Speakers", localVolume);
+            // Volume must be swapped here cus of how VBCable is coffigured to stream audios to microphone output.
+            PlayMp3Audio(filePath, "Cable", localVolume);
+            PlayMp3Audio(filePath, "Speakers", virtualCableVolume);
         }
 
         /// <summary>
@@ -58,8 +59,8 @@ namespace ParticleSoundboard.src
         private void PlayMp3Audio(string filePath, string deviceName, float volume)
         {
 
-            WaveStream pcmStream = WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader(filePath));
-            BlockAlignReductionStream? stream = new BlockAlignReductionStream(pcmStream);
+            //WaveStream pcmStream = WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader(filePath));
+            //BlockAlignReductionStream? stream = new BlockAlignReductionStream(pcmStream);
 
             virtualCableOutput.DeviceNumber = outputDevices.IndexOf(outputDevices.FirstOrDefault(
                 device => device.ProductName.Contains(deviceName)));
