@@ -21,7 +21,6 @@ namespace ParticleSoundboard
         private string[] soundFiles;
 
         private List<Button> buttons;
-        private SolidColorBrush buttonBackgroundColor;
 
         private AudioEngine audioEngine;
 
@@ -36,14 +35,10 @@ namespace ParticleSoundboard
             SetupSoundsFolder(soundsFolderPath);
             soundFiles = Directory.GetFiles(soundsFolderPath, "*", SearchOption.TopDirectoryOnly);
 
-            buttonBackgroundColor = new SolidColorBrush(Color.FromRgb(79, 93, 126));
-            buttons = FindButtons(7, 6);
+            // TODO: Make buttons dynamically based on amount of files in the sounds folder.
+            buttons = FindButtons(7, 8);
 
             SetupButtonsTextContent(soundFiles, buttons);
-            SetupButtonsBackgroundColor(buttons, buttonBackgroundColor);
-
-            StopButton.Background = buttonBackgroundColor;
-
 
             LocalVolumeSlider.Value = 25;
             CableVolumeSlider.Value = 50;
@@ -113,19 +108,6 @@ namespace ParticleSoundboard
         }
 
         /// <summary>
-        /// Setup the Buttons Background Color.
-        /// </summary>
-        /// <param name="buttonsList"> List of Buttons to setup background. </param>
-        /// <param name="backgroundColor"> The color to use as a background color. </param>
-        private void SetupButtonsBackgroundColor(List<Button> buttonsList, SolidColorBrush backgroundColor)
-        {
-            foreach (Button button in buttonsList)
-            {
-                button.Background = backgroundColor;
-            }
-        }
-
-        /// <summary>
         /// Try to find the Sounds folder inside the application root folder.
         /// If it doens't exist, create a new one.
         /// </summary>
@@ -176,6 +158,30 @@ namespace ParticleSoundboard
         private void LocalVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             localVolume = (float)LocalVolumeSlider.Value / 100.0f;
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void ExitButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Close();
+            }
+        }
+
+        private void MinimizeButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                WindowState = WindowState.Minimized;
+            }
         }
     }
 }

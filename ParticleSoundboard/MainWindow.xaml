@@ -4,147 +4,424 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParticleSoundboard"
-        mc:Ignorable="d" Title="Particle Soundboard" Height="600" Width="945" Background="#FF2D3134"
-        ResizeMode="CanMinimize" WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" Closing="Window_Closing">
+        mc:Ignorable="d" Title="Particle Soundboard" 
+        Height="600"
+        Width="945" 
+        Background="#181735"
+        ResizeMode="NoResize" 
+        WindowStyle="None" 
+        Loaded="Window_Loaded" 
+        Closing="Window_Closing">
+    
     <Grid Name="ButtonsGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>            
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="10"/>
-
-
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" 
+              Grid.ColumnSpan="9" 
+              Background="#0F0F2D"
+              MouseDown="Grid_MouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="600" />                
+                <ColumnDefinition />
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
 
-        <Button x:Name="Button1" Grid.Column="1" Grid.Row="1" MouseDown="Button_Click" />
-        <Button x:Name="Button2" Grid.Column="2" Grid.Row="1" MouseDown="Button_Click" />
-        <Button x:Name="Button3" Grid.Column="3" Grid.Row="1" MouseDown="Button_Click" />
-        <Button x:Name="Button4" Grid.Column="4" Grid.Row="1" MouseDown="Button_Click" />
-        <Button x:Name="Button5" Grid.Column="5" Grid.Row="1" MouseDown="Button_Click" />
-        <Button x:Name="Button6" Grid.Column="6" Grid.Row="1" MouseDown="Button_Click" />
-        <Button x:Name="Button7" Grid.Column="7" Grid.Row="1" MouseDown="Button_Click" />
 
-        <Button x:Name="Button8" Grid.Column="1" Grid.Row="2" MouseDown="Button_Click" />
-        <Button x:Name="Button9" Grid.Column="2" Grid.Row="2" MouseDown="Button_Click" />
-        <Button x:Name="Button10" Grid.Column="3" Grid.Row="2" MouseDown="Button_Click" />
-        <Button x:Name="Button11" Grid.Column="4" Grid.Row="2" MouseDown="Button_Click" />
-        <Button x:Name="Button12" Grid.Column="5" Grid.Row="2" MouseDown="Button_Click" />
-        <Button x:Name="Button13" Grid.Column="6" Grid.Row="2" MouseDown="Button_Click" />
-        <Button x:Name="Button14" Grid.Column="7" Grid.Row="2" MouseDown="Button_Click" />
+            <Image Grid.Column="0"
+                   Margin="10,5,0,5" 
+                   Source="/Assets/Icon/ParticleSoundboardIcon.png" />
+            <TextBlock x:Name="WindowTitle" 
+                       Text="Particle Soundboard" 
+                       Grid.Column="1"
+                       FontFamily="#Dosis"
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="20,0,0,0"
+                       FontSize="16"/>
+            <Viewbox Grid.Column="3" Stretch="Uniform" >
+            <Button x:Name="MinimizeButton"
+                        Grid.Column="3"
+                        Content="Minimize"
+                        Foreground="LightGray"
+                        FontSize="20"
+                        Margin="0,9,0,9"
+                        MouseDown="MinimizeButton_MouseDown"/>
+            </Viewbox>
+            <Viewbox Grid.Column="4" Stretch="Uniform">
+                <Button x:Name="ExitButton"
+                        Content="Exit"
+                        Foreground="LightGray"
+                        FontSize="20"
+                        Margin="0,9,0,9"
+                        MouseDown="ExitButton_MouseDown"/>
+            </Viewbox>
+        </Grid>
+        
+        <Button x:Name="Button1" 
+                Grid.Column="1" 
+                Grid.Row="1" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button2" 
+                Grid.Column="2" 
+                Grid.Row="1" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button3" 
+                Grid.Column="3" 
+                Grid.Row="1" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button4" 
+                Grid.Column="4" 
+                Grid.Row="1" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button5" 
+                Grid.Column="5" 
+                Grid.Row="1" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button6" 
+                Grid.Column="6" 
+                Grid.Row="1" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button7" 
+                Grid.Column="7" 
+                Grid.Row="1" 
+                MouseDown="Button_Click" />
 
-        <Button x:Name="Button15" Grid.Column="1" Grid.Row="3" MouseDown="Button_Click" />
-        <Button x:Name="Button16" Grid.Column="2" Grid.Row="3" MouseDown="Button_Click" />
-        <Button x:Name="Button17" Grid.Column="3" Grid.Row="3" MouseDown="Button_Click" />
-        <Button x:Name="Button18" Grid.Column="4" Grid.Row="3" MouseDown="Button_Click" />
-        <Button x:Name="Button19" Grid.Column="5" Grid.Row="3" MouseDown="Button_Click" />
-        <Button x:Name="Button20" Grid.Column="6" Grid.Row="3" MouseDown="Button_Click" />
-        <Button x:Name="Button21" Grid.Column="7" Grid.Row="3" MouseDown="Button_Click" />
+        <Button x:Name="Button8" 
+                Grid.Column="1" 
+                Grid.Row="2" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button9" 
+                Grid.Column="2"
+                Grid.Row="2"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button10"
+                Grid.Column="3" 
+                Grid.Row="2" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button11" 
+                Grid.Column="4" 
+                Grid.Row="2"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button12" 
+                Grid.Column="5" 
+                Grid.Row="2" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button13"
+                Grid.Column="6" 
+                Grid.Row="2" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button14"
+                Grid.Column="7"
+                Grid.Row="2"
+                MouseDown="Button_Click" />
 
-        <Button x:Name="Button22" Grid.Column="1" Grid.Row="4" MouseDown="Button_Click" />
-        <Button x:Name="Button23" Grid.Column="2" Grid.Row="4" MouseDown="Button_Click" />
-        <Button x:Name="Button24" Grid.Column="3" Grid.Row="4" MouseDown="Button_Click" />
-        <Button x:Name="Button25" Grid.Column="4" Grid.Row="4" MouseDown="Button_Click" />
-        <Button x:Name="Button26" Grid.Column="5" Grid.Row="4" MouseDown="Button_Click" />
-        <Button x:Name="Button27" Grid.Column="6" Grid.Row="4" MouseDown="Button_Click" />
-        <Button x:Name="Button28" Grid.Column="7" Grid.Row="4" MouseDown="Button_Click" />
+        <Button x:Name="Button15" 
+                Grid.Column="1"
+                Grid.Row="3"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button16" 
+                Grid.Column="2" 
+                Grid.Row="3"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button17" 
+                Grid.Column="3"
+                Grid.Row="3"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button18"
+                Grid.Column="4"
+                Grid.Row="3"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button19" 
+                Grid.Column="5" 
+                Grid.Row="3" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button20"
+                Grid.Column="6"
+                Grid.Row="3" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button21"
+                Grid.Column="7"
+                Grid.Row="3" 
+                MouseDown="Button_Click" />
 
-        <Button x:Name="Button29" Grid.Column="1" Grid.Row="5" MouseDown="Button_Click" />
-        <Button x:Name="Button30" Grid.Column="2" Grid.Row="5" MouseDown="Button_Click" />
-        <Button x:Name="Button31" Grid.Column="3" Grid.Row="5" MouseDown="Button_Click" />
-        <Button x:Name="Button32" Grid.Column="4" Grid.Row="5" MouseDown="Button_Click" />
-        <Button x:Name="Button33" Grid.Column="5" Grid.Row="5" MouseDown="Button_Click" />
-        <Button x:Name="Button34" Grid.Column="6" Grid.Row="5" MouseDown="Button_Click" />
-        <Button x:Name="Button35" Grid.Column="7" Grid.Row="5" MouseDown="Button_Click" />
+        <Button x:Name="Button22"
+                Grid.Column="1" 
+                Grid.Row="4" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button23" 
+                Grid.Column="2" 
+                Grid.Row="4" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button24"
+                Grid.Column="3" 
+                Grid.Row="4"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button25"
+                Grid.Column="4"
+                Grid.Row="4" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button26"
+                Grid.Column="5"
+                Grid.Row="4"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button27" 
+                Grid.Column="6" 
+                Grid.Row="4" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button28"
+                Grid.Column="7" 
+                Grid.Row="4"
+                MouseDown="Button_Click" />
 
-        <Button x:Name="Button36" Grid.Column="1" Grid.Row="6" MouseDown="Button_Click" />
-        <Button x:Name="Button37" Grid.Column="2" Grid.Row="6" MouseDown="Button_Click" />
-        <Button x:Name="Button38" Grid.Column="3" Grid.Row="6" MouseDown="Button_Click" />
-        <Button x:Name="Button39" Grid.Column="4" Grid.Row="6" MouseDown="Button_Click" />
-        <Button x:Name="Button40" Grid.Column="5" Grid.Row="6" MouseDown="Button_Click" />
-        <Button x:Name="Button41" Grid.Column="6" Grid.Row="6" MouseDown="Button_Click" />
-        <Button x:Name="Button42" Grid.Column="7" Grid.Row="6" MouseDown="Button_Click" />
+        <Button x:Name="Button29" 
+                Grid.Column="1" 
+                Grid.Row="5"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button30" 
+                Grid.Column="2" 
+                Grid.Row="5"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button31"
+                Grid.Column="3"
+                Grid.Row="5" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button32"
+                Grid.Column="4"
+                Grid.Row="5"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button33" 
+                Grid.Column="5"
+                Grid.Row="5" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button34" 
+                Grid.Column="6" 
+                Grid.Row="5"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button35" 
+                Grid.Column="7" 
+                Grid.Row="5" 
+                MouseDown="Button_Click" />
 
-        <Button x:Name="Button43" Grid.Column="1" Grid.Row="7" MouseDown="Button_Click" />
-        <Button x:Name="Button44" Grid.Column="2" Grid.Row="7" MouseDown="Button_Click" />
-        <Button x:Name="Button45" Grid.Column="3" Grid.Row="7" MouseDown="Button_Click" />
-        <Button x:Name="Button46" Grid.Column="4" Grid.Row="7" MouseDown="Button_Click" />
-        <Button x:Name="Button47" Grid.Column="5" Grid.Row="7" MouseDown="Button_Click" />
-        <Button x:Name="Button48" Grid.Column="6" Grid.Row="7" MouseDown="Button_Click" />
-        <Button x:Name="Button49" Grid.Column="7" Grid.Row="7" MouseDown="Button_Click" />
+        <Button x:Name="Button36" 
+                Grid.Column="1"
+                Grid.Row="6"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button37"
+                Grid.Column="2" 
+                Grid.Row="6"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button38" 
+                Grid.Column="3" 
+                Grid.Row="6" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button39"
+                Grid.Column="4" 
+                Grid.Row="6"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button40"
+                Grid.Column="5"
+                Grid.Row="6"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button41"
+                Grid.Column="6"
+                Grid.Row="6"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button42"
+                Grid.Column="7"
+                Grid.Row="6"
+                MouseDown="Button_Click" />
 
-        <Button x:Name="Button50" Grid.Column="1" Grid.Row="8" MouseDown="Button_Click" />
-        <Button x:Name="Button51" Grid.Column="2" Grid.Row="8" MouseDown="Button_Click" />
-        <Button x:Name="Button52" Grid.Column="3" Grid.Row="8" MouseDown="Button_Click" />
-        <Button x:Name="Button53" Grid.Column="4" Grid.Row="8" MouseDown="Button_Click" />
-        <Button x:Name="Button54" Grid.Column="5" Grid.Row="8" MouseDown="Button_Click" />
-        <Button x:Name="Button55" Grid.Column="6" Grid.Row="8" MouseDown="Button_Click" />
-        <Button x:Name="Button56" Grid.Column="7" Grid.Row="8" MouseDown="Button_Click" />
+        <Button x:Name="Button43" 
+                Grid.Column="1"
+                Grid.Row="7"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button44"
+                Grid.Column="2" 
+                Grid.Row="7"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button45"
+                Grid.Column="3"
+                Grid.Row="7" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button46" 
+                Grid.Column="4"
+                Grid.Row="7"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button47"
+                Grid.Column="5" 
+                Grid.Row="7" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button48"
+                Grid.Column="6"
+                Grid.Row="7" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button49"
+                Grid.Column="7"
+                Grid.Row="7"
+                MouseDown="Button_Click" />
 
-        <Separator Grid.Column="1" Grid.ColumnSpan="8" Grid.Row="9" />
+        <Button x:Name="Button50"
+                Grid.Column="1" 
+                Grid.Row="8"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button51" 
+                Grid.Column="2"
+                Grid.Row="8"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button52" 
+                Grid.Column="3"
+                Grid.Row="8"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button53" 
+                Grid.Column="4" 
+                Grid.Row="8" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button54"
+                Grid.Column="5" 
+                Grid.Row="8"
+                MouseDown="Button_Click" />
+        <Button x:Name="Button55"
+                Grid.Column="6" 
+                Grid.Row="8" 
+                MouseDown="Button_Click" />
+        <Button x:Name="Button56" 
+                Grid.Column="7" 
+                Grid.Row="8" 
+                MouseDown="Button_Click" />
 
-        <Viewbox Grid.Column="1" Grid.Row="10" Stretch="Uniform">
-            <Button x:Name="StopButton" MouseDown="ButtonStop_Click" FontSize="14" Content="Stop" />
-        </Viewbox>
-        <Viewbox Grid.Column="7" Grid.Row="10" Stretch="None">
-            <CheckBox x:Name="AudioOverlapCheckBox" FontSize="14" Content="Overlap Audio?" Foreground="White" Click="AudioOverlapCheckBox_Click"/>
+        <Viewbox Grid.Column="1"
+                 Grid.Row="10"
+                 Stretch="Uniform">
+            <Button x:Name="StopButton"
+                    MouseDown="ButtonStop_Click"
+                    FontSize="14" 
+                    Content="Stop" 
+                    Margin="10" />
         </Viewbox>
         
-        <Viewbox Grid.Column="2" Grid.Row="10" Stretch="None">
+        <Viewbox Grid.Column="7" 
+                 Grid.Row="10" 
+                 Stretch="None">
+            <CheckBox x:Name="AudioOverlapCheckBox" 
+                      FontSize="14" 
+                      Content="Overlap Audio?" 
+                      Foreground="White" 
+                      FontFamily="#Dosis"
+                      FontWeight="Medium"
+                      Click="AudioOverlapCheckBox_Click"/>
+        </Viewbox>
+        
+        <Viewbox Grid.Column="2" 
+                 Grid.Row="10" 
+                 Stretch="None">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Label Content="Local Volume" FontSize="14" Foreground="White" Grid.Row="0"/>
-                <Slider x:Name="LocalVolumeSlider" Grid.Row="1" Maximum="100" ValueChanged="LocalVolumeSlider_ValueChanged"/>
+                <TextBlock Text="Local Volume" 
+                       FontSize="14"
+                       FontFamily="#Dosis"
+                       FontWeight="Medium"
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Grid.Row="0"/>
+                <Slider x:Name="LocalVolumeSlider" 
+                        Grid.Row="1" 
+                        Maximum="100"               
+                        ValueChanged="LocalVolumeSlider_ValueChanged"/>
             </Grid>
         </Viewbox>
         
-        <Viewbox Grid.Column="3" Grid.Row="10" Stretch="None">
+        <Viewbox Grid.Column="3"
+                 Grid.Row="10" 
+                 Stretch="None">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Label Content="Cable Volume" FontSize="14" Foreground="White" Grid.Row="0" />
-                <Slider x:Name="CableVolumeSlider" Grid.Row="1" Maximum="100" ValueChanged="CableVolumeSlider_ValueChanged"/>
+                <TextBlock Text="Cable Volume" 
+                       FontSize="14" 
+                       Foreground="White" 
+                       FontFamily="#Dosis"
+                       FontWeight="Medium"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Grid.Row="0" />
+                <Slider x:Name="CableVolumeSlider" 
+                        Grid.Row="1" 
+                        Maximum="100" 
+                        ValueChanged="CableVolumeSlider_ValueChanged"/>
             </Grid>
         </Viewbox>
 
         <Grid.Resources>
             <Style TargetType="Button">
-                <Setter Property="Width" Value="120" />
-                <Setter Property="Height" Value="50" />
-                <Setter Property="Margin" Value="5" />
-                <Setter Property="ClickMode" Value="Hover" />
-                <Setter Property="Background" Value="#FF4F5D7E" />
-                <Setter Property="HorizontalAlignment" Value="Center" />
-                <Setter Property="BorderBrush" Value="{x:Null}" />
-                <Setter Property="FontSize" Value="10" />
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="TextElement.FontFamily"
+                        Value="#Dosis" />
+                <Setter Property="Background" 
+                        Value="#FFDE6B36" />
+                <Setter Property="Cursor" 
+                        Value="Hand" /> 
+                <Setter Property="Margin" 
+                        Value="5" />
+                <Setter Property="ClickMode" 
+                        Value="Hover" />
+                <Setter Property="FontSize" 
+                        Value="10" />
+                <Setter Property="Foreground" 
+                        Value="White" />
+                <Setter Property="FontWeight"
+                        Value="Medium" />
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="120"
+                                    MaxWidth="120"
+                                    Height="35"
+                                    CornerRadius="15"
+                                    Background="{TemplateBinding Background}" >
+                                <ContentPresenter
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
                 <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="#FF313F60" />
+                    <Trigger Property="IsMouseOver" 
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="#E39063" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
