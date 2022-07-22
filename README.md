@@ -9,7 +9,7 @@ So I used to use this free Soundboard App that I've found out there so I could s
 Just clone and build it if you want to use it.
 
 ### How to use: 
-1. Put the **MP3** files into the **Sounds folder*(**inside the app bin directory or where the app executable is**).
+1. Put the **MP3** files into the **Sounds folder** (**inside the app bin directory or where the app executable is**).
 
 2. [You need to configure the VBCable Sound drivers](https://youtu.be/wUFbKww5-Vg?t=42).
 
