@@ -388,7 +388,7 @@
                 <Setter Property="TextElement.FontFamily"
                         Value="#Dosis" />
                 <Setter Property="Background" 
-                        Value="#FFDE6B36" />
+                        Value="#FF5D5D5D" />
                 <Setter Property="Cursor" 
                         Value="Hand" /> 
                 <Setter Property="Margin" 
@@ -421,7 +421,7 @@
                     <Trigger Property="IsMouseOver" 
                              Value="True">
                         <Setter Property="Background"
-                                Value="#E39063" />
+                                Value="#FF9C9C9C" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
