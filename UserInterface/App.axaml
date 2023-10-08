@@ -1,0 +1,24 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="UserInterface.App"
+             RequestedThemeVariant="Dark">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+	
+	<Application.Resources>
+		<!-- Background Colors -->
+		<SolidColorBrush x:Key="Background">#2C2C2C</SolidColorBrush>
+		<SolidColorBrush x:Key="DarkBackground">#1F1F1F</SolidColorBrush>
+		
+		<!-- Primary and Secondary Colors --> 
+		<SolidColorBrush x:Key="Primary">#2D8C7F</SolidColorBrush>
+		<SolidColorBrush x:Key="DarkPrimary">#1E6055</SolidColorBrush>
+		<SolidColorBrush x:Key="LightPrimary">#5FAEA0</SolidColorBrush>		
+		<SolidColorBrush x:Key="Secondary">#FFB347</SolidColorBrush>
+		<SolidColorBrush x:Key="SecondaryLight">#FFD18F</SolidColorBrush>
+		<SolidColorBrush x:Key="SecondaryDark">#E58C27</SolidColorBrush>
+	</Application.Resources>
+</Application>

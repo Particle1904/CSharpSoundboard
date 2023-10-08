@@ -1,0 +1,80 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:UserInterface.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="945" d:DesignHeight="600"
+             x:Class="UserInterface.Views.MainView"
+             x:DataType="vm:MainViewModel"
+			 Background="{DynamicResource Background}">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+	<!-- Apply Styling to the DESIGNER in the IDE itself -->
+	<Design.DesignStyle>
+		<StyleInclude Source="/Assets/Styles/GlobalStyles.axaml" />
+	</Design.DesignStyle>
+	
+	<Grid RowDefinitions="Auto, *, Auto">
+		<!-- Tittle Bar -->
+		<Grid Grid.Row="0" Height="50"
+			  Grid.ColumnDefinitions="*, *, *"
+			  Background="{DynamicResource DarkBackground}"
+			  ShowGridLines="True">
+			<StackPanel Grid.Column="1"  Orientation="Horizontal">
+				<Image VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6"
+				   Source="/Assets/Icon/ParticleSoundboardIcon.png"/>
+				<Label VerticalAlignment="Center" HorizontalAlignment="Center"
+					   FontWeight="Bold"
+					   FontSize="20"
+					   Content="Particle Soundboard"/>
+			</StackPanel>
+
+		</Grid>
+
+		<!-- Main app Body-->
+		<ScrollViewer Grid.Row="1">
+			<Grid Name="Grid_Buttons"
+			  Grid.ColumnDefinitions="*, *, *, *, *, *, *">
+				<StackPanel Name="StackPanel_Buttons_0" Grid.Column="0" VerticalAlignment="Top">
+				</StackPanel>
+				<StackPanel Name="StackPanel_Buttons_1" Grid.Column="1" VerticalAlignment="Top">
+				</StackPanel>
+				<StackPanel Name="StackPanel_Buttons_2" Grid.Column="2" VerticalAlignment="Top">
+				</StackPanel>
+				<StackPanel Name="StackPanel_Buttons_3" Grid.Column="3" VerticalAlignment="Top">
+				</StackPanel>
+				<StackPanel Name="StackPanel_Buttons_4" Grid.Column="4" VerticalAlignment="Top">
+				</StackPanel>
+				<StackPanel Name="StackPanel_Buttons_5" Grid.Column="5" VerticalAlignment="Top">
+				</StackPanel>
+				<StackPanel Name="StackPanel_Buttons_6" Grid.Column="6" VerticalAlignment="Top">
+				</StackPanel>
+			</Grid>
+		</ScrollViewer>
+
+		<!-- Control Bar -->
+		<Grid Grid.Row="2" Height="100" ShowGridLines="True"
+			  Grid.ColumnDefinitions="10, *, 10, *, 10, *, 10, *, 10"
+			  Background="{DynamicResource DarkBackground}">
+			<Button Grid.Column="1" 
+					Content="Stop Audio"
+					Command="{Binding StopSoundAsyncCommand}"/>
+			<StackPanel Grid.Column="3">
+				<Slider Value="{Binding LocalVolume}"/>
+				<Label Content="Local Volume"/>
+			</StackPanel>
+			<StackPanel Grid.Column="5">
+				<Slider Value="{Binding CableVolume}"/>
+				<Label Content="Cable Volume"/>
+			</StackPanel>
+			<StackPanel Grid.Column="7" Orientation="Horizontal" HorizontalAlignment="Center">
+				<CheckBox IsChecked="{Binding CanAudioOverlap}" 
+						  Command="{Binding ToggleCanAudioOverlapCommand}"/>
+				<Label>Can audio overlap?</Label>
+			</StackPanel>
+		</Grid>
+	</Grid>
+</UserControl>
