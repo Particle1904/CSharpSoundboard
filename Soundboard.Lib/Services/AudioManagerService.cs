@@ -100,7 +100,6 @@ namespace Soundboard.Lib.Services
                 {
                     Bass.ChannelStop(cableStreamFiles[i]);
                     Bass.ChannelStop(localStreamFiles[i]);
-                    return;
                 }
             }
         }
