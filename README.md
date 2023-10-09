@@ -1,27 +1,41 @@
-# Particle Soundboard - Using C#, NAudio Library and VBCable.
- 
-**Why I made it:** 
-So I used to use this free Soundboard App that I've found out there so I could stream audio directly to my microphone in Voice Apps (mostly in Discord)... problem was it was using about half a gb of Ram for a non stop stream of advertisements. I was literally freezing the app every once in a while! So I decided to make my own Soundboard. Very simple app with just one functionality: 
-# **Stream Mp3 files directly to the microphone Output.**
+# Particle Soundboard App 
+The Avalonia C# Soundboard App is a lightweight, cross-platform soundboard application designed for streaming .mp3 and .wav files to both local speakers and VB Cable Input simultaneously. Whether you're a content creator, streamer, or just want a simple way to play sounds during voice chats, this app has you covered.
 
-![Alt Text](https://github.com/LeonardoFer/CSharpSoundBoard/blob/main/SoundboardDescriptionImage.png?raw=true)
+![Alt Text](https://github.com/Particle1904/CSharpSoundBoard/blob/main/SoundboardDescriptionImage.png?raw=true)
 
-Just clone and build it if you want to use it.
+## Features
+- Simultaneous Playback: Stream .mp3 and .wav files to both the local speakers and VB Cable Input at the same time.
+- Stop All Sounds: Easily stop all playing sounds with a single click.
+- Volume Control: Configure local and Cable Input volumes separately for precise control.
+- Custom Sound Folder: Choose your preferred folder to read sound files, with a default folder in the root directory of the application.
+- Multi-Sound Playback: Play two or more sounds simultaneously, avoiding the exact same sound.
+- Audio Overlap Toggle: Toggle between overlapping audio playback or non-overlapping audio.
+- Cross-Platform GUI: Capable of running on Linux and MacOS with minor code adjustments and a different Virtual Audio Cable (VAC) software/driver, as VB Cable is Windows and Mac only.
+![Alt Text](https://github.com/Particle1904/CSharpSoundBoard/blob/main/WLSExample.png?raw=true)
 
-### How to use: 
-1. Put the **MP3** files into the **Sounds folder** (**inside the app bin directory or where the app executable is**).
+## Getting Started
+To get started with the Particle Soundboard, download the provided release (for Windows) or build yourself.
+To build clone this repository and open the project in Visual Studio 2022 or later. You can then build and run the project.
 
-2. [You need to configure the VBCable Sound drivers](https://youtu.be/wUFbKww5-Vg?t=42).
+## Requirements
+This software requires the .NET7 runtime:
+- [.NET Desktop Runtime 7.0.4](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
 
-3. **Select CABLE Output for your INPUT DEVICE in Discord to use it!**
-4. Open your microphone and click the button you want to play the audio (it works better with **Discord Push-to-Talk** :)).
-5. **Have fun!**
+## Usage
+- Select your sound folder.
+- Configure local and Cable Input volumes.
+- Toggle audio overlap according to your preference.
+- Play your desired sounds with ease.
+- Stop all sounds when necessary.
 
-### **It only supports .Mp3 files at the moment!**
+## Technologies
+- [ManagedBass](https://github.com/ManagedBass/ManagedBass) [(un4seen bass)](https://www.un4seen.com): Utilized for audio management.
+- [Avalonia](https://avaloniaui.net): Employed for creating a multiplatform graphical user interface (GUI).
+- [.NET 7 and C#](https://dotnet.microsoft.com/en-us/download/dotnet/7.0): The core development stack.
+- [VB Cable](https://vb-audio.com/Cable/): Used for audio routing on Windows and MacOS.
 
-## Tech used and where to find them:
- - **C#** with **.NET6**.
- - **WPF** - I'm planning on migrating it to MAUI to learn MAUI when its released.
- - [NAudio and NAudio.Core NuGet Packages](https://www.nuget.org/packages/NAudio/) - This is the guy thats doing all the magic behind the scenes! Amazing C# Audio Library by Mark Heath and it runs on .NET5 and .NET6.
+## Contributing
+Contributions to the Particle Soundboard are welcome. If you would like to contribute, fork this repository, make your changes, and create a pull request.
 
-### Feel free to copy, change and improve it however you like!
+## License
+The Particle Soundboard is licensed under the MIT License. See the LICENSE file for more information.
