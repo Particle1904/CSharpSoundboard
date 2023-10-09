@@ -1,7 +1,7 @@
 # Particle Soundboard App 
 The Avalonia C# Soundboard App is a lightweight, cross-platform soundboard application designed for streaming .mp3 and .wav files to both local speakers and VB Cable Input simultaneously. Whether you're a content creator, streamer, or just want a simple way to play sounds during voice chats, this app has you covered.
 
-![Alt Text](https://github.com/Particle1904/CSharpSoundBoard/blob/main/SoundboardDescriptionImage.png?raw=true)
+![Alt Text](https://github.com/Particle1904/CSharpSoundboard/blob/be0eb8e2217500759ea714827b7373b754a2d9e9/SoundboardDescriptionImage.png?raw=true)
 
 ## Features
 - Simultaneous Playback: Stream .mp3 and .wav files to both the local speakers and VB Cable Input at the same time.
