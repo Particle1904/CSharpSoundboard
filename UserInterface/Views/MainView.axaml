@@ -17,25 +17,35 @@
 		<StyleInclude Source="/Assets/Styles/GlobalStyles.axaml" />
 	</Design.DesignStyle>
 	
-	<Grid RowDefinitions="Auto, *, Auto">
+	<Grid RowDefinitions="Auto, Auto, *, Auto">
 		<!-- Tittle Bar -->
 		<Grid Grid.Row="0" Height="50"
 			  Grid.ColumnDefinitions="*, *, *"
-			  Background="{DynamicResource DarkBackground}"
-			  ShowGridLines="True">
-			<StackPanel Grid.Column="1"  Orientation="Horizontal">
+			  Background="{DynamicResource DarkBackground}">
+			<StackPanel Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center">
 				<Image VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6"
-				   Source="/Assets/Icon/ParticleSoundboardIcon.png"/>
+					   Source="/Assets/Icon/ParticleSoundboardIcon.ico"/>
 				<Label VerticalAlignment="Center" HorizontalAlignment="Center"
 					   FontWeight="Bold"
 					   FontSize="20"
 					   Content="Particle Soundboard"/>
 			</StackPanel>
-
 		</Grid>
 
+		<!-- Secondary Bar -->
+		<Grid Grid.Row="1" Height="50" Grid.ColumnDefinitions="80*, 20*"
+					Background="{DynamicResource IntermediaryBackground}">
+			<Label Grid.Column="0" Margin="10" Content="{Binding SoundsFolderPath}"
+				   HorizontalAlignment="Left"/>
+			<Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"
+					Content="Select input folder" 
+					VerticalContentAlignment="Center" 
+					HorizontalContentAlignment="Center"
+					Command="{Binding SelectSoundsFolderCommand}"/>		
+		</Grid>
+		
 		<!-- Main app Body-->
-		<ScrollViewer Grid.Row="1">
+		<ScrollViewer Grid.Row="2">
 			<Grid Name="Grid_Buttons"
 			  Grid.ColumnDefinitions="*, *, *, *, *, *, *">
 				<StackPanel Name="StackPanel_Buttons_0" Grid.Column="0" VerticalAlignment="Top">
@@ -56,19 +66,20 @@
 		</ScrollViewer>
 
 		<!-- Control Bar -->
-		<Grid Grid.Row="2" Height="100" ShowGridLines="True"
+		<Grid Grid.Row="3" Height="80"
 			  Grid.ColumnDefinitions="10, *, 10, *, 10, *, 10, *, 10"
 			  Background="{DynamicResource DarkBackground}">
 			<Button Grid.Column="1" 
+					FontSize="25"
 					Content="Stop Audio"
 					Command="{Binding StopSoundAsyncCommand}"/>
 			<StackPanel Grid.Column="3">
-				<Slider Value="{Binding LocalVolume}"/>
-				<Label Content="Local Volume"/>
+				<Slider Value="{Binding LocalVolume}" Margin="20, -10, 20, 0"/>
+				<Label Content="Local Volume" Margin="0, -10, 0, 0"/>
 			</StackPanel>
 			<StackPanel Grid.Column="5">
-				<Slider Value="{Binding CableVolume}"/>
-				<Label Content="Cable Volume"/>
+				<Slider Value="{Binding CableVolume}" Margin="20, -10, 20, 0"/>
+				<Label Content="Cable Volume" Margin="0, -10, 0, 0"/>
 			</StackPanel>
 			<StackPanel Grid.Column="7" Orientation="Horizontal" HorizontalAlignment="Center">
 				<CheckBox IsChecked="{Binding CanAudioOverlap}" 

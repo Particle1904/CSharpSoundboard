@@ -1,7 +1,5 @@
 ﻿using ManagedBass;
 
-using System.Diagnostics;
-
 namespace Soundboard.Lib.Services
 {
     /// <summary>
@@ -13,6 +11,20 @@ namespace Soundboard.Lib.Services
         public string DefaultFolderPath
         {
             get => _defaultFolderPath;
+        }
+        private string _soundsFolderPath;
+        public string SoundsFolderPath
+        {
+            get => _soundsFolderPath;
+            set
+            {
+                _soundsFolderPath = value;
+                if (!Directory.Exists(SoundsFolderPath))
+                {
+                    Directory.CreateDirectory(SoundsFolderPath);
+                }
+                LoadAudioFilesFromFolder(SoundsFolderPath);
+            }
         }
 
         private const string _cableDeviceString = "Cable";
@@ -37,10 +49,7 @@ namespace Soundboard.Lib.Services
         /// </summary>
         public AudioManagerService()
         {
-            if (!Directory.Exists(_defaultFolderPath))
-            {
-                Directory.CreateDirectory(_defaultFolderPath);
-            }
+            SoundsFolderPath = _defaultFolderPath;
 
             for (int i = 0; i < Bass.DeviceCount; i++)
             {
@@ -56,8 +65,6 @@ namespace Soundboard.Lib.Services
                     Bass.Init(i);
                 }
             }
-
-            LoadAudioFilesFromFolder(_defaultFolderPath);
         }
 
         /// <summary>
@@ -91,9 +98,9 @@ namespace Soundboard.Lib.Services
             {
                 if (Bass.ChannelIsActive(cableStreamFiles[i]) == PlaybackState.Playing)
                 {
-                    Debug.WriteLine($"Device is playing");
                     Bass.ChannelStop(cableStreamFiles[i]);
                     Bass.ChannelStop(localStreamFiles[i]);
+                    return;
                 }
             }
         }

@@ -7,7 +7,7 @@
 		xmlns:local="clr-namespace:UserInterface"
         mc:Ignorable="d" d:DesignWidth="945" d:DesignHeight="600"
         x:Class="UserInterface.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/Icon/ParticleSoundboardIcon.ico"
         Title="Particle Soundboard"
 		Width="945"
 		Height="600"

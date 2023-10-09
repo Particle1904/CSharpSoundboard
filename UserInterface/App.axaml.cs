@@ -5,7 +5,6 @@ using Avalonia.Markup.Xaml;
 
 using Soundboard.Lib.Services;
 
-using UserInterface.ViewModels;
 using UserInterface.Views;
 
 namespace UserInterface;

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Avalonia;
 
-using Avalonia;
+using System;
 
 namespace UserInterface.Desktop;
 

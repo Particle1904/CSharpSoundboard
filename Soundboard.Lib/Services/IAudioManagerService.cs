@@ -2,6 +2,7 @@
 {
     public interface IAudioManagerService
     {
+        public string SoundsFolderPath { get; set; }
         public string DefaultFolderPath { get; }
         public string[] FileNames { get; }
         public bool CanAudioOverlap { get; set; }
