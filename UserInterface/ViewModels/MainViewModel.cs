@@ -1,13 +1,7 @@
-﻿using Avalonia.Controls;
-
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using Soundboard.Lib.Services;
-
-using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace UserInterface.ViewModels;
 
@@ -19,10 +13,10 @@ public partial class MainViewModel : ViewModelBase
     private string _soundsFolderPath;
 
     private float _localVolume;
-    public int LocalVolume 
+    public int LocalVolume
     {
         get => (int)(_localVolume * 100.0f);
-        
+
         set
         {
             _localVolume = (float)(value / 100.0f);
@@ -48,7 +42,7 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel(IAudioManagerService audioManagerService)
     {
         _audioManagerService = audioManagerService;
-        SoundsFolderPath = _audioManagerService.GetDefaultSoundsFolder();
+        SoundsFolderPath = _audioManagerService.DefaultFolderPath;
 
         LocalVolume = 50;
         CableVolume = 50;
@@ -65,22 +59,22 @@ public partial class MainViewModel : ViewModelBase
         CableVolume = 50;
         CanAudioOverlap = false;
     }
-    
+
     [RelayCommand]
     public void ButtonClick(object parameter)
     {
-        _audioManagerService.PlayAudio((string)parameter, _cableVolume, _cableVolume);
+        _audioManagerService.PlayAudio((string)parameter, _cableVolume, _localVolume);
     }
 
     [RelayCommand]
     public void StopSoundAsync()
     {
-        _audioManagerService.StopWave();
+        _audioManagerService.Stop();
     }
 
     [RelayCommand]
     public void ToggleCanAudioOverlap()
-    { 
+    {
         _audioManagerService.CanAudioOverlap = CanAudioOverlap;
     }
 }
