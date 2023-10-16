@@ -17,6 +17,12 @@ The Particle C# Soundboard App is a lightweight, cross-platform soundboard appli
 To get started with the Particle Soundboard, download the provided release (for Windows) or build yourself.
 To build clone this repository and open the project in Visual Studio 2022 or later. You can then build and run the project.
 
+2. [You need to configure the VBCable Sound drivers](https://youtu.be/wUFbKww5-Vg?t=42).
+
+3. **Select CABLE Output for your INPUT DEVICE in Discord to use it!**
+4. Open your microphone and click the button you want to play the audio (it works better with **Discord Push-to-Talk** :)).
+5. **Have fun!**
+
 ## Requirements
 This software requires the .NET7 runtime:
 - [.NET Desktop Runtime 7.0.4](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
