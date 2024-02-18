@@ -23,6 +23,8 @@ To build clone this repository and open the project in Visual Studio 2022 or lat
 4. Open your microphone and click the button you want to play the audio (it works better with **Discord Push-to-Talk** :)).
 5. **Have fun!**
 
+PS: Disable Discord noise suppression feature, it _can_ breaks some sounds.
+
 ## Requirements
 This software requires the .NET7 runtime:
 - [.NET Desktop Runtime 7.0.4](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
