@@ -154,7 +154,10 @@ namespace Soundboard.Lib.Services
         /// <param name="inputFolderPath">Path to the folder containing audio files.</param>
         private void LoadAudioFilesFromFolder(string inputFolderPath)
         {
-            string[] soundFiles = Directory.GetFiles(inputFolderPath, "*.mp3");
+            string[] soundFiles = Directory.GetFiles(inputFolderPath, "*.*", SearchOption.TopDirectoryOnly)
+                .Where(file => Path.GetExtension(file).Contains(".mp3") || Path.GetExtension(file).Contains(".wav"))
+                .DistinctBy(fileWithoutExtension => Path.GetFileNameWithoutExtension(fileWithoutExtension))
+                .ToArray();
 
             if (_cableFilesStream == null || _localFilesStream == null)
             {
